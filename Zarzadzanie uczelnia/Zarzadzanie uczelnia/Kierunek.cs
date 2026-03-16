@@ -8,5 +8,8 @@ namespace Zarzadzanie_uczelnia
 {
     internal class Kierunek
     {
+        public ICollection<Grupa> Grupy { get; set; }
+        public int ID { get; set; }
+        public string Nazwa { get; set; }
     }
 }
