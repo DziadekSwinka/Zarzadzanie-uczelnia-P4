@@ -27,6 +27,7 @@
         <ComboBox x:Name="Kierunek" Grid.Row="2" Grid.Column="0" Width="150" Height="30" SelectedIndex="0" Margin="0,10,0,0"/>
         <Button x:Name="Add" Grid.Row="2" Grid.Column="1" Content="Dodaj Studenta" Click="AddStudent" Margin="10,10,0,0"/>
 
-        <DataGrid x:Name="StudenciGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="True" Margin="0,10,0,0"/>
+        <DataGrid x:Name="StudenciGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="True" Margin="0,25,0,0"/>
+        <CheckBox x:Name="AutoGrupaCheckBox" Content="Przydziel automatycznie do grupy" HorizontalAlignment="Left" Margin="22,5,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="CheckBox_Checked" Grid.ColumnSpan="2" Width="214" IsChecked="True"/>
     </Grid>
 </Window>

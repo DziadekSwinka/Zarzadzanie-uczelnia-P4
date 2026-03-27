@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zarzadzanie_uczelnia;
 
@@ -11,9 +12,11 @@ using Zarzadzanie_uczelnia;
 namespace Zarzadzanie_uczelnia.Migrations
 {
     [DbContext(typeof(UczelniaContext))]
-    partial class UczelniaContextModelSnapshot : ModelSnapshot
+    [Migration("20260327121713_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Zarzadzanie_uczelnia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("KierunekID")
+                    b.Property<int?>("KierunekID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nazwa")
@@ -144,13 +147,9 @@ namespace Zarzadzanie_uczelnia.Migrations
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Grupa", b =>
                 {
-                    b.HasOne("Zarzadzanie_uczelnia.Kierunek", "Kierunek")
+                    b.HasOne("Zarzadzanie_uczelnia.Kierunek", null)
                         .WithMany("Grupy")
-                        .HasForeignKey("KierunekID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kierunek");
+                        .HasForeignKey("KierunekID");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>

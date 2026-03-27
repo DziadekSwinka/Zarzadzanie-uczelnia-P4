@@ -13,5 +13,6 @@ namespace Zarzadzanie_uczelnia
         [Key]
         public int ID { get; set; }
         public ICollection<Student> Studenci { get; set; }
+        public Kierunek Kierunek { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Zarzadzanie_uczelnia
     {
         public MainWindow()
         {
-            InitializeComponent();  
+            InitializeComponent();
             WczytajKierunki();
             WczytajStudentow();
         }
@@ -77,6 +77,7 @@ namespace Zarzadzanie_uczelnia
 
         private void AddStudent(object sender, RoutedEventArgs e)
         {
+            int studentId;
             using (var context = new UczelniaContext())
             {
                 var student = new Student
@@ -86,12 +87,41 @@ namespace Zarzadzanie_uczelnia
                     Email = EmailBox.Text,
                     NrTelefonu = Convert.ToInt32(TelefonBox.Text)
                 };
-
                 context.Studenci.Add(student);
                 context.SaveChanges();
+                studentId = student.ID;
             }
+            DodajStudentaDoPierwszejGrupyJeśliCheckboxOdznaczony(studentId);
             WczytajStudentow();
         }
+        private void DodajStudentaDoPierwszejGrupyJeśliCheckboxOdznaczony(int studentId)
+        {
+            if (AutoGrupaCheckBox.IsChecked == true)
+            {
+                using (var context = new UczelniaContext())
+                {
+                    var wybranyKierunek = (Kierunek.SelectedItem as ComboBoxItem)?.Content?.ToString();
+                    if (string.IsNullOrEmpty(wybranyKierunek)) return;
+
+                    var grupa = context.Grupy
+                        .Where(g => g.Kierunek.Nazwa == wybranyKierunek)
+                        .OrderBy(g => g.ID)
+                        .FirstOrDefault();
+
+                    if (grupa != null)
+                    {
+                        var studentZBazy = context.Studenci.FirstOrDefault(s => s.ID == studentId);
+                        if (studentZBazy != null)
+                        {
+                            studentZBazy.GrupaID = grupa.ID;
+                            context.SaveChanges();
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -112,6 +142,11 @@ namespace Zarzadzanie_uczelnia
                 ((TextBox)sender).Text = "Imię";
                 ((TextBox)sender).Foreground = Brushes.Gray;
             }*/
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

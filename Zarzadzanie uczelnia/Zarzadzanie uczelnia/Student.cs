@@ -24,6 +24,7 @@ namespace Zarzadzanie_uczelnia
         public int Rocznik { get; set; }
         public string? Email { get; set; }
         public int? NrTelefonu { get; set; }
-        public ICollection<Oceny>Ocena{ get; set; }   
+        public ICollection<Oceny>Ocena{ get; set; }
+        public int? GrupaID { get; set; }
     }
 }
