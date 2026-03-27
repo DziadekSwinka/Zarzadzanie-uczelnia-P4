@@ -1,0 +1,18 @@
+﻿<Page x:Class="Zarzadzanie_uczelnia.GrupyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zarzadzanie_uczelnia"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GrupyPage">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Grupy" VerticalAlignment="Top"/>
+        <Button Content="Dodaj grupę" HorizontalAlignment="Left" Margin="50,92,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="lub"/><Run Text=" wybierz "/><Run Language="pl-pl" Text="instniejącą"/><Run Text="z listy"/></TextBlock>
+        <DataGrid x:Name="GrupyGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="True" Margin="0,25,0,0"/>
+
+    </Grid>
+</Page>

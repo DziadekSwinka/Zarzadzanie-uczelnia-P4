@@ -2,32 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Zarządzanie uczelnią" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="Nowy student" Margin="0,0,0,10"/>
-
-        <TextBox x:Name="ImieBox" Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Text="Imię" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="NazwiskoBox" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Text="Nazwisko" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="TelefonBox" Grid.Row="1" Grid.Column="2" Margin="0,0,10,0" Text="Nr Telefonu" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="EmailBox" Grid.Row="1" Grid.Column="3" Text="Email" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-
-        <ComboBox x:Name="Kierunek" Grid.Row="2" Grid.Column="0" Width="150" Height="30" SelectedIndex="0" Margin="0,10,0,0"/>
-        <Button x:Name="Add" Grid.Row="2" Grid.Column="1" Content="Dodaj Studenta" Click="AddStudent" Margin="10,10,0,0"/>
-
-        <DataGrid x:Name="StudenciGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="True" Margin="0,25,0,0"/>
-        <CheckBox x:Name="AutoGrupaCheckBox" Content="Przydziel automatycznie do grupy" HorizontalAlignment="Left" Margin="22,5,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="CheckBox_Checked" Grid.ColumnSpan="2" Width="214" IsChecked="True"/>
+    <Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
