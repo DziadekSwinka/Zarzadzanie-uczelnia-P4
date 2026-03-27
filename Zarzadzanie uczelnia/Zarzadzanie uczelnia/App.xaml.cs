@@ -9,6 +9,8 @@ namespace Zarzadzanie_uczelnia
     /// </summary>
     public partial class App : Application
     {
+        
     }
+
 
 }

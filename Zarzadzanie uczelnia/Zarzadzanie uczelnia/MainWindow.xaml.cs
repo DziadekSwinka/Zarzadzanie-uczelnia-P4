@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Data.Common;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,38 @@ namespace Zarzadzanie_uczelnia
         public MainWindow()
         {
             InitializeComponent();
+            WczytajStudentow();
+        }
+
+        private void WczytajStudentow()
+        {
+            using (var db = new UczelniaContext())
+            {
+                StudenciGrid.ItemsSource = db.Studenci.ToList();
+            }
+        }
+
+        private void AddStudent(object sender, RoutedEventArgs e)
+        {
+            using (var context = new UczelniaContext())
+            {
+                var student = new Student
+                {
+                    Imie = ImieBox.Text,
+                    Nazwisko = NazwiskoBox.Text,
+                    Email = EmailBox.Text,
+                    NrTelefonu = Convert.ToInt32(TelefonBox.Text)
+                };
+
+                context.Studenci.Add(student);
+                context.SaveChanges();
+            }
+            WczytajStudentow();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

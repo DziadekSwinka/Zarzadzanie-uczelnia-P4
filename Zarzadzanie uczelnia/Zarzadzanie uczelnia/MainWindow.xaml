@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zarzadzanie_uczelnia"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Zarządzanie uczelnią" Height="450" Width="800">
     <Grid>
-
+        <DataGrid x:Name="StudenciGrid" AutoGenerateColumns="True"/>
+        <Button Content="Dodaj Studenta" HorizontalAlignment="Left" Margin="522,236,0,0" VerticalAlignment="Top" Click="AddStudent" RenderTransformOrigin="0.382,1.545"/>
+        <TextBox x:Name="ImieBox" HorizontalAlignment="Left" Margin="78,217,0,0" TextWrapping="Wrap" Text="Imię" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="NazwiskoBox" HorizontalAlignment="Left" Margin="78,238,0,0" TextWrapping="Wrap" Text="Nazwisko" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="TelefonBox" HorizontalAlignment="Left" Margin="253,217,0,0" TextWrapping="Wrap" Text="Nr Telefonu" VerticalAlignment="Top" Width="88" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Margin="253,238,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="197" TextChanged="TextBox_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="78,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86"><Run Language="pl-pl" Text="Nowy student"/></TextBlock>
+      
     </Grid>
 </Window>

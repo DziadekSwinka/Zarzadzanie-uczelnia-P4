@@ -10,6 +10,6 @@ namespace Zarzadzanie_uczelnia
     {
         public ICollection<Grupa> Grupy { get; set; }
         public int ID { get; set; }
-        public string Nazwa { get; set; }
+        public string? Nazwa { get; set; }
     }
 }
