@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Zarzadzanie_uczelnia
 {
@@ -19,15 +20,58 @@ namespace Zarzadzanie_uczelnia
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
+            WczytajKierunki();
             WczytajStudentow();
+        }
+        public void WczytajKierunki()
+        {
+            using (var db = new UczelniaContext())
+            {
+                var opcje =db.Kierunki.Select(k => k.Nazwa).ToList();
+
+                Kierunek.Items.Clear();
+                var placeholder = new ComboBoxItem
+                {
+                    Content = "Kierunek",
+                    IsEnabled = false,
+                    Foreground = Brushes.Gray
+                };
+                Kierunek.Items.Add(placeholder);
+
+                foreach (var opcja in opcje)
+                    Kierunek.Items.Add(new ComboBoxItem { Content = opcja });
+
+                Kierunek.SelectedIndex = 0;
+
+                Kierunek.SelectionChanged += (s, e) =>
+                {
+                    if (Kierunek.SelectedIndex == 0) return;
+
+                    if (Kierunek.Items.Contains(placeholder))
+                        Kierunek.Items.Remove(placeholder);
+                };
+            }
         }
 
         private void WczytajStudentow()
         {
             using (var db = new UczelniaContext())
             {
-                StudenciGrid.ItemsSource = db.Studenci.ToList();
+                var studenci = db.Studenci
+                    .Select(s => new
+                    {
+                        s.ID,
+                        s.Imie,
+                        s.Nazwisko,
+                        s.NrTelefonu,
+                        s.Email,
+                        s.Rocznik
+                    })
+                    .Distinct()
+                    .ToList();
+
+                StudenciGrid.ItemsSource = studenci;
             }
         }
 
@@ -49,9 +93,25 @@ namespace Zarzadzanie_uczelnia
             WczytajStudentow();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            var textBox = sender as TextBox;
+            if (textBox == null) return;
 
+            var placeholderTexts = new[] { "Imię", "Nazwisko", "NrTelefonu", "Email" };
+            if (placeholderTexts.Contains(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            /*if (string.IsNullOrWhiteSpace(((TextBox)sender).Text))
+            {
+                ((TextBox)sender).Text = "Imię";
+                ((TextBox)sender).Foreground = Brushes.Gray;
+            }*/
         }
     }
 }

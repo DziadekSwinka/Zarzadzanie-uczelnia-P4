@@ -21,7 +21,7 @@ namespace Zarzadzanie_uczelnia
         public string Imie { get; set; }
         [Required]
         public string Nazwisko { get; set; }
-        public int? Rocznik { get; set; }
+        public int Rocznik { get; set; }
         public string? Email { get; set; }
         public int? NrTelefonu { get; set; }
         public ICollection<Oceny>Ocena{ get; set; }   
