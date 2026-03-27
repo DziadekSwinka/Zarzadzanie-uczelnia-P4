@@ -91,10 +91,10 @@ namespace Zarzadzanie_uczelnia
                 context.SaveChanges();
                 studentId = student.ID;
             }
-            DodajStudentaDoPierwszejGrupyJeśliCheckboxOdznaczony(studentId);
+            DodajDoGrupy(studentId);
             WczytajStudentow();
         }
-        private void DodajStudentaDoPierwszejGrupyJeśliCheckboxOdznaczony(int studentId)
+        private void DodajDoGrupy(int studentId)
         {
             if (AutoGrupaCheckBox.IsChecked == true)
             {
@@ -119,16 +119,18 @@ namespace Zarzadzanie_uczelnia
                     }
                 }
             }
+            else
+            {
+                var OknoGrupy = new Grupy();
+                OknoGrupy.ShowDialog();
+            }
         }
-
-
-
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
             if (textBox == null) return;
 
-            var placeholderTexts = new[] { "Imię", "Nazwisko", "NrTelefonu", "Email" };
+            var placeholderTexts = new[] { "Imię", "Nazwisko", "Nr Telefonu", "Email" };
             if (placeholderTexts.Contains(textBox.Text))
             {
                 textBox.Text = string.Empty;
