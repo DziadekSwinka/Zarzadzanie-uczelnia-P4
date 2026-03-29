@@ -26,6 +26,7 @@ namespace Zarzadzanie_uczelnia
             InitializeComponent();
             WczytajKierunki();
             WczytajStudentow();
+            //DataContext = new Student();
         }
 
         public void WczytajKierunki()
@@ -70,7 +71,7 @@ namespace Zarzadzanie_uczelnia
                         s.Nazwisko,
                         s.NrTelefonu,
                         s.Email,
-                        s.Rocznik
+                        Rok_Urodzenia=s.Rocznik
                     })
                     .Distinct()
                     .ToList();
@@ -78,9 +79,30 @@ namespace Zarzadzanie_uczelnia
                 StudenciGrid.ItemsSource = studenci;
             }
         }
-
+        private string ValidateStudent()
+        {
+            string blad = null;
+            if (string.IsNullOrWhiteSpace(ImieBox.Text))
+                blad += "Podaj imię\n";
+            if (string.IsNullOrWhiteSpace(NazwiskoBox.Text))
+                blad += "Podaj nazwisko\n";
+            if (!string.IsNullOrWhiteSpace(EmailBox.Text) && !EmailBox.Text.Contains("@"))
+                blad += "Niepoprawny email\n";
+            if (!string.IsNullOrWhiteSpace(TelefonBox.Text) && TelefonBox.Text.Length < 9)
+                blad += "Niepoprawny numer telefonu\n";
+            if (Kierunek.SelectedIndex==0)
+                blad += "Wybierz kierunek\n";
+            if (!int.TryParse(RokBox.Text, out int rok) || rok < 1900 || rok > DateTime.Now.Year)
+                blad += "Niepoprawny rok urodzenia\n";
+            return blad;
+        }
         private void AddStudent(object sender, RoutedEventArgs e)
         {
+            if (ValidateStudent() is string error)
+            {
+                MessageBox.Show(error);
+                return;
+            }
             int studentId;
             using (var context = new UczelniaContext())
             {
@@ -89,7 +111,8 @@ namespace Zarzadzanie_uczelnia
                     Imie = ImieBox.Text,
                     Nazwisko = NazwiskoBox.Text,
                     Email = EmailBox.Text,
-                    NrTelefonu = Convert.ToInt32(TelefonBox.Text)
+                    NrTelefonu = TelefonBox.Text,
+                    Rocznik = int.TryParse(RokBox.Text, out int rok) ? rok : 0
                 };
                 context.Studenci.Add(student);
                 context.SaveChanges();
@@ -135,7 +158,7 @@ namespace Zarzadzanie_uczelnia
             var textBox = sender as TextBox;
             if (textBox == null) return;
 
-            var placeholderTexts = new[] { "Imię", "Nazwisko", "Nr Telefonu", "Email" };
+            var placeholderTexts = new[] { "Imię", "Nazwisko", "Nr Telefonu", "Email", "Rok urodzenia" };
             if (placeholderTexts.Contains(textBox.Text))
             {
                 textBox.Text = string.Empty;

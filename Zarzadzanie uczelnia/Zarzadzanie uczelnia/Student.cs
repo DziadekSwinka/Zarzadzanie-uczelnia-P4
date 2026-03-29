@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Zarzadzanie_uczelnia
 {
-    internal class Student
+    internal class Student: IDataErrorInfo
     {
         public Student()
         {
@@ -23,8 +23,40 @@ namespace Zarzadzanie_uczelnia
         public string Nazwisko { get; set; }
         public int Rocznik { get; set; }
         public string? Email { get; set; }
-        public int? NrTelefonu { get; set; }
+        public string? NrTelefonu { get; set; }
         public ICollection<Oceny>Ocena{ get; set; }
         public int? GrupaID { get; set; }
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "Imie":
+                        if (string.IsNullOrWhiteSpace(Imie))
+                            return "Imię jest wymagane";
+                        break;
+
+                    case "Nazwisko":
+                        if (string.IsNullOrWhiteSpace(Nazwisko))
+                            return "Nazwisko jest wymagane";
+                        break;
+
+                    case "Email":
+                        if (!string.IsNullOrWhiteSpace(Email) && !Email.Contains("@"))
+                            return "Email musi zawierać @";
+                        break;
+
+                    case "NrTelefonu":
+                        if (NrTelefonu != null && NrTelefonu.Length < 9)
+                            return "Numer telefonu za krótki";
+                        break;
+                }
+
+                return null;
+            }
+        }
     }
 }
