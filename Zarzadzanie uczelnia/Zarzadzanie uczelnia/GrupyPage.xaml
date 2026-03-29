@@ -17,11 +17,10 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="1" 
@@ -34,11 +33,8 @@
 
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Margin="10">
-            <Run Text="lub"/>
-            <Run Text=" wybierz "/>
-            <Run Language="pl-pl" Text="istniejącą"/>
-            <Run Text=" z listy"/>
+                   Margin="10" Text="lub wybierz istniejącą z listy">
+            
         </TextBlock>
 
         <DataGrid x:Name="GrupyGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" 

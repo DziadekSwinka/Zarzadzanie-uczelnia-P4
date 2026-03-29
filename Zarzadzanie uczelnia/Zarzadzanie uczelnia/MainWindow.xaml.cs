@@ -29,5 +29,19 @@ namespace Zarzadzanie_uczelnia
         {
             MainFrame.Navigate(page);
         }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
+        private void Grupy_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new GrupyPage());
+        }
+
+        private void Studenci_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new StudenciPage());
+        }
     }
 }
