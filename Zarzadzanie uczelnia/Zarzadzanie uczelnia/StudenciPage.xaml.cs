@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Zarzadzanie_uczelnia;
 
 namespace Zarzadzanie_uczelnia
 {
@@ -71,7 +60,7 @@ namespace Zarzadzanie_uczelnia
                         s.Nazwisko,
                         s.NrTelefonu,
                         s.Email,
-                        Rok_Urodzenia=s.Rocznik
+                        Rok_Urodzenia = s.Rocznik
                     })
                     .Distinct()
                     .ToList();
@@ -90,7 +79,7 @@ namespace Zarzadzanie_uczelnia
                 blad += "Niepoprawny email\n";
             if (!string.IsNullOrWhiteSpace(TelefonBox.Text) && TelefonBox.Text.Length < 9)
                 blad += "Niepoprawny numer telefonu\n";
-            if (Kierunek.SelectedIndex==0)
+            if (Kierunek.SelectedIndex == 0)
                 blad += "Wybierz kierunek\n";
             if (!int.TryParse(RokBox.Text, out int rok) || rok < 1900 || rok > DateTime.Now.Year)
                 blad += "Niepoprawny rok urodzenia\n";
@@ -118,7 +107,6 @@ namespace Zarzadzanie_uczelnia
                 context.SaveChanges();
                 studentId = student.ID;
             }
-
             DodajDoGrupy(studentId);
             WczytajStudentow();
         }
@@ -173,7 +161,6 @@ namespace Zarzadzanie_uczelnia
                 ((TextBox)sender).Foreground = Brushes.Gray;
             }*/
         }
-
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
 

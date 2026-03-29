@@ -42,6 +42,18 @@ namespace Zarzadzanie_uczelnia
                 GrupyGrid.ItemsSource = grupy;
             }
         }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox == null) return;
+
+            var placeholderTexts = new[] { "Nazwa grupy" };
+            if (placeholderTexts.Contains(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

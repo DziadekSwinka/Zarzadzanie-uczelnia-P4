@@ -39,6 +39,6 @@
 
         <DataGrid x:Name="GrupyGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" 
                   AutoGenerateColumns="True" Margin="10"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Nazwa grupy" VerticalAlignment="Center" Width="120"/>
+        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Nazwa grupy" VerticalAlignment="Center" Width="120" GotFocus="TextBox_GotFocus"/>
     </Grid>
 </Page>
