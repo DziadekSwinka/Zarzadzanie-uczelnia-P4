@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Zarzadzanie_uczelnia.Models;
+using Newtonsoft.Json;
 
 
 namespace Zarzadzanie_uczelnia
 {
-        internal class UczelniaContext: DbContext
+    internal class UczelniaContext: DbContext
         {    
             private readonly String connectionString = @"Server=KUBA_LAPTOP\SQLEXPRESS;Database=UczelniaDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
@@ -20,7 +22,7 @@ namespace Zarzadzanie_uczelnia
         public DbSet<Przedmioty> Przedmiot { get; set; }
         public DbSet<Oceny> Ocena { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlServer(//connection stringa moge wrzucic sobie do app.configa i stamtad go pobierac, ale na razie zostawie tak
+        => options.UseSqlServer(
            connectionString);
         }
 }

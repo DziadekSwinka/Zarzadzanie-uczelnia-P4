@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Text.RegularExpressions;
 
 namespace Zarzadzanie_uczelnia
 {
@@ -70,15 +71,15 @@ namespace Zarzadzanie_uczelnia
         }
         private string ValidateStudent()
         {
-            string blad = null;
+            string blad = "";
             if (string.IsNullOrWhiteSpace(ImieBox.Text))
                 blad += "Podaj imię\n";
             if (string.IsNullOrWhiteSpace(NazwiskoBox.Text))
                 blad += "Podaj nazwisko\n";
-            if (!string.IsNullOrWhiteSpace(EmailBox.Text) && !EmailBox.Text.Contains("@"))
+            if (!Regex.IsMatch(TelefonBox.Text, @"^\+?\d{ 7,15}$"))
+                blad += "Niepoprawny numer teleofnu\n";
+            if (!Regex.IsMatch(EmailBox.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
                 blad += "Niepoprawny email\n";
-            if (!string.IsNullOrWhiteSpace(TelefonBox.Text) && TelefonBox.Text.Length < 9)
-                blad += "Niepoprawny numer telefonu\n";
             if (Kierunek.SelectedIndex == 0)
                 blad += "Wybierz kierunek\n";
             if (!int.TryParse(RokBox.Text, out int rok) || rok < 1900 || rok > DateTime.Now.Year)

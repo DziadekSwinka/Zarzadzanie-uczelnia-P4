@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zarzadzanie_uczelnia
+namespace Zarzadzanie_uczelnia.Models
 {
-    internal class Student: IDataErrorInfo
+    internal class Student : IDataErrorInfo
     {
         public Student()
         {
@@ -24,7 +24,7 @@ namespace Zarzadzanie_uczelnia
         public int Rocznik { get; set; }
         public string? Email { get; set; }
         public string? NrTelefonu { get; set; }
-        public ICollection<Oceny>Ocena{ get; set; }
+        public ICollection<Oceny> Ocena { get; set; }
         public int? GrupaID { get; set; }
         public string Error => null;
 
