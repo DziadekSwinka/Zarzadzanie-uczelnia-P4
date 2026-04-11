@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(local)\\SQLEXPRESS;Database=UczelniaDB;Trusted_Connection=True;TrustServerCertificate=True;
+  }
+}
