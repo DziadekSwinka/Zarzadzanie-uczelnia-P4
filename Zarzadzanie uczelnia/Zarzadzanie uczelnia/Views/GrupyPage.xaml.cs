@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zarzadzanie_uczelnia.View_Models;
 
 namespace Zarzadzanie_uczelnia
 {
@@ -20,42 +21,16 @@ namespace Zarzadzanie_uczelnia
     /// </summary>
     public partial class GrupyPage : Page
     {
+        private GroupViewModel viewModel;
         public GrupyPage()
         {
+            viewModel = new GroupViewModel();  
+            DataContext = viewModel;
             InitializeComponent();
-            WczytajGrupe();
-        }
-        private void WczytajGrupe()
-        {
-            using (var db = new UczelniaContext())
-            {
-                var grupy = db.Grupy
-                    .Select(g => new
-                    {
-                        g.ID,
-                        g.Nazwa,
-                        KierunekNazwa = g.Kierunek.Nazwa
-                    })
-                    .Distinct()
-                    .ToList();
-
-                GrupyGrid.ItemsSource = grupy;
-            }
-        }
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox == null) return;
-
-            var placeholderTexts = new[] { "Nazwa grupy" };
-            if (placeholderTexts.Contains(textBox.Text))
-            {
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black;
-            }
+            viewModel.WczytajGrupe();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Group(object sender, RoutedEventArgs e)
         {
 
         }

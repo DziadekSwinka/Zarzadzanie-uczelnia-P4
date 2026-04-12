@@ -32,30 +32,5 @@ namespace Zarzadzanie_uczelnia
         {
             viewModel.AddStudent();
         }
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox == null) return;
-
-            var placeholderTexts = new[] { "Imię", "Nazwisko", "Nr Telefonu", "Email", "Rok urodzenia" };
-            if (placeholderTexts.Contains(textBox.Text))
-            {
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black;
-            }
-        }
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            /*if (string.IsNullOrWhiteSpace(((TextBox)sender).Text))
-            {
-                ((TextBox)sender).Text = "Imię";
-                ((TextBox)sender).Foreground = Brushes.Gray;
-            }*/
-        }
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        
     }
 }

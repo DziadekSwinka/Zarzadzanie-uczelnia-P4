@@ -1,23 +1,63 @@
 ﻿<Window x:Class="Zarzadzanie_uczelnia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Zarządzanie uczelnią" Height="450" Width="800">
-    <Window.Resources>
-        
-    </Window.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="LightGray">
-            <Button Content="Studenci" Click="Studenci_Click" Height="20"/>
-            <Button Content="Grupy" Click="Grupy_Click" Height="20"/>
-        </StackPanel>
+        Title="Zarządzanie uczelnią"
+        Height="500" Width="900"
+        Background="#F5F7FA">
 
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#2C3E50" CornerRadius="0,10,10,0">
+            <StackPanel Margin="10">
+
+                <TextBlock Text="Panel"
+                           Foreground="White"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Margin="10"/>
+
+                <Button Content="Studenci"
+                        Height="40"
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="Studenci_Click"/>
+
+                <Button Content="Grupy"
+                        Height="40"
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="Grupy_Click"/>
+
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="White" CornerRadius="10" Margin="10">
+                <TextBlock Text="Zarządzanie uczelnią"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="15,0"/>
+            </Border>
+
+            <Border Grid.Row="1" Background="White" CornerRadius="10" Margin="10,0,10,10">
+                <Frame x:Name="MainFrame"
+                       NavigationUIVisibility="Hidden"
+                       Navigated="MainFrame_Navigated"/>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

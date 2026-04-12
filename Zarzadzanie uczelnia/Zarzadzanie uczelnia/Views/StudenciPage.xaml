@@ -82,7 +82,7 @@
         </Border>
 
         <Border Grid.Row="2" Background="White" CornerRadius="10" Padding="10" Margin="0">
-            <DataGrid x:Name="StudenciGrid"
+            <DataGrid ItemsSource="{Binding Studenci}"
                       AutoGenerateColumns="True"
                       IsReadOnly="True"
                       VerticalAlignment="Stretch"
