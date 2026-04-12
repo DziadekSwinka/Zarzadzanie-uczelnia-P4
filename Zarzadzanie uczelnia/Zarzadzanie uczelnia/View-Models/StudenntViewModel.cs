@@ -124,27 +124,13 @@ namespace Zarzadzanie_uczelnia.View_Models
 
         private string ValidateStudent()
         {
-            string blad = "";
+            var validator = new StudentValidator();
+            var result = validator.Validate(this);
 
-            if (string.IsNullOrWhiteSpace(Imie))
-                blad += "Podaj imię\n";
+            if (result.IsValid)
+                return "";
 
-            if (string.IsNullOrWhiteSpace(Nazwisko))
-                blad += "Podaj nazwisko\n";
-
-            if (!Regex.IsMatch(nrTelefonu, @"^\+?\d{ 7,15}$"))
-                blad += "Niepoprawny numer teleofnu\n";
-
-            if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                blad += "Niepoprawny email\n";
-
-            if (string.IsNullOrEmpty(Kierunek))
-                blad += "Wybierz kierunek\n";
-
-            if (Rocznik < 1900 || Rocznik > DateTime.Now.Year)
-                blad += "Niepoprawny rok urodzenia\n";
-
-            return blad;
+            return string.Join("\n", result.Errors.Select(e => e.ErrorMessage));
         }
 
         public void AddStudent()
