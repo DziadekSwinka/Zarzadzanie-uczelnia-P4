@@ -1,0 +1,62 @@
+﻿<Page x:Class="Zarzadzanie_uczelnia.Views.OcenyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="OcenyPage">
+
+    <Grid Background="#F5F7FA" Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Lista ocen"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="0,0,0,10"/>
+
+        <Border Grid.Row="1" Padding="15" Background="White" CornerRadius="10" Margin="0,0,0,10">
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock Text="ID studenta" FontWeight="SemiBold"/>
+                    <TextBox Text="{Binding FilterStudentId}" Height="30"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock Text="Przedmiot" FontWeight="SemiBold"/>
+                    <TextBox Text="{Binding FilterPrzedmiot}" Height="30"/>
+                </StackPanel>
+
+                <Button Grid.Column="2"
+                        Content="Filtruj"
+                        Height="30"
+                        Margin="10,23,0,0"
+                        Background="#3498DB"
+                        Foreground="White"
+                        BorderThickness="0"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Background="White"
+                CornerRadius="10"
+                Padding="10">
+
+            <DataGrid ItemsSource="{Binding Oceny}"
+                      AutoGenerateColumns="True"
+                      IsReadOnly="True"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"/>
+
+        </Border>
+
+    </Grid>
+</Page>

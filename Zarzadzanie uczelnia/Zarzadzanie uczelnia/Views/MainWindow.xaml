@@ -36,6 +36,22 @@
                         BorderThickness="0"
                         Click="Grupy_Click"/>
 
+                <Button Content="Oceny"
+                        Height="40"
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="Oceny_click"/>
+                
+                <Button Content="Dodaj Ocenę"
+                        Height="40"
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="DodajOcene_click"/>
+
             </StackPanel>
         </Border>
 

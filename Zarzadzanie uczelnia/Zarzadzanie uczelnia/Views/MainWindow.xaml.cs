@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using Zarzadzanie_uczelnia;
+using Zarzadzanie_uczelnia.Views;
 
 namespace Zarzadzanie_uczelnia
 {
@@ -42,6 +43,14 @@ namespace Zarzadzanie_uczelnia
         private void Studenci_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new StudenciPage());
+        } 
+        private void Oceny_click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OcenyPage());
+        } 
+        private void DodajOcene_click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OcenyAddPage());
         }
     }
 }
