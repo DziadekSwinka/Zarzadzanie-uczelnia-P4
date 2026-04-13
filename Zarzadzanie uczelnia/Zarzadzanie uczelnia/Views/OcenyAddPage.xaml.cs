@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zarzadzanie_uczelnia.View_Models;
 
 namespace Zarzadzanie_uczelnia.Views
 {
@@ -23,6 +24,10 @@ namespace Zarzadzanie_uczelnia.Views
         public OcenyAddPage()
         {
             InitializeComponent();
+        }
+        private void DodajOcene_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("To muszę jeszcze dorobić!");
         }
     }
 }
