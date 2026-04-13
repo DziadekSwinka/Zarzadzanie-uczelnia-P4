@@ -5,11 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using FluentValidation;
 using Zarzadzanie_uczelnia.Models;
 
 namespace Zarzadzanie_uczelnia.View_Models
 {
-    internal class GroupViewModel : INotifyPropertyChanged
+    public class GroupViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -65,9 +67,25 @@ namespace Zarzadzanie_uczelnia.View_Models
 
             OnPropertyChanged(nameof(Kierunki));
         }
+        private string ValidateGroup()
+        {
+            var validator = new GroupValidator();
+            var result = validator.Validate(this);
+
+            if (result.IsValid)
+                return "";
+
+            return string.Join("\n", result.Errors.Select(e => e.ErrorMessage));
+        }
         public void AddGroup()
         {
-            //TODO: walidacja danych
+            var error = ValidateGroup();
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
 
             using (var db = new UczelniaContext())
             {
@@ -79,6 +97,7 @@ namespace Zarzadzanie_uczelnia.View_Models
                 db.Grupy.Add(grupa);
                 db.SaveChanges();
             }
+            WczytajGrupe();
         }
     }
 
