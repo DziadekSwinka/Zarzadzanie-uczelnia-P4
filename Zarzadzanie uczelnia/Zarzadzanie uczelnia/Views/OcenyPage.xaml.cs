@@ -21,8 +21,11 @@ namespace Zarzadzanie_uczelnia.Views
     /// </summary>
     public partial class OcenyPage : Page
     {
+        private StudentViewModel viewModel;
         public OcenyPage()
         {
+            viewModel = new StudentViewModel();
+            DataContext = viewModel;
             InitializeComponent();
         }
     }
