@@ -28,11 +28,12 @@ namespace Zarzadzanie_uczelnia
             DataContext = viewModel;
             InitializeComponent();
             viewModel.WczytajGrupe();
+            viewModel.loadKierunki();
         }
 
         private void Add_Group(object sender, RoutedEventArgs e)
         {
-
+            viewModel.AddGroup();
         }
     }
 }

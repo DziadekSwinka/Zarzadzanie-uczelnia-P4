@@ -27,16 +27,22 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
                     <TextBlock Text="Nazwa grupy" FontWeight="SemiBold"/>
-                    <TextBox Width="200"
-                             Height="30"
+                    <TextBox Height="30"
                              Text="{Binding NazwaGrupy}"/>
                 </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
+                    <TextBlock Text="Kierunek" FontWeight="SemiBold"/>
+                    <ComboBox ItemsSource="{Binding Kierunki}"
+                        SelectedItem="{Binding WybranyKierunek}"
+                        Height="30"/>
+                </StackPanel>
 
-                <Button Grid.Row="0" Grid.Column="1"
+                <Button Grid.Row="0" Grid.Column="2"
                         Content="Dodaj grupę"
                         Height="40"
                         Margin="10,20,0,0"

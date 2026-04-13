@@ -22,6 +22,18 @@ namespace Zarzadzanie_uczelnia.View_Models
             get => nazwaGrupy;
             set { nazwaGrupy = value; OnPropertyChanged(nameof(NazwaGrupy)); }
         }
+        private string wybranyKierunek;
+        public string WybranyKierunek
+        {
+            get => wybranyKierunek;
+            set { wybranyKierunek = value; OnPropertyChanged(nameof(WybranyKierunek)); }
+        }
+        private ObservableCollection<string> kierunki;
+        public ObservableCollection<string> Kierunki
+        {
+            get => kierunki;
+            set { kierunki = value; OnPropertyChanged(nameof(Kierunki)); }
+        }
         public ObservableCollection<GrupyDTO> Grupy { get; set; } = new();
         public void WczytajGrupe()
         {
@@ -33,7 +45,7 @@ namespace Zarzadzanie_uczelnia.View_Models
                     {
                         ID = g.ID,
                         Nazwa = g.Nazwa,
-                        KierunekNazwa = g.Kierunek.Nazwa
+                        NazwaKierunku = g.Kierunek.Nazwa
                     })
                     .ToList();
 
@@ -41,6 +53,31 @@ namespace Zarzadzanie_uczelnia.View_Models
                 {
                     Grupy.Add(g);
                 }
+            }
+        }
+        public void loadKierunki()
+        {
+            using var db = new UczelniaContext();
+
+            Kierunki = new ObservableCollection<string>(
+                db.Kierunki.Select(k => k.Nazwa).ToList()
+            );
+
+            OnPropertyChanged(nameof(Kierunki));
+        }
+        public void AddGroup()
+        {
+            //TODO: walidacja danych
+
+            using (var db = new UczelniaContext())
+            {
+                var grupa = new Grupa
+                {
+                    Nazwa = this.NazwaGrupy,
+                    Kierunek = db.Kierunki.FirstOrDefault(k => k.Nazwa == this.WybranyKierunek)
+                };
+                db.Grupy.Add(grupa);
+                db.SaveChanges();
             }
         }
     }
