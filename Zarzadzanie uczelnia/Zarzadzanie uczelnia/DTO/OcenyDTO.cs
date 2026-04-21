@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zarzadzanie_uczelnia.Models
+namespace Zarzadzanie_uczelnia.DTO
 {
     internal class OcenyDTO
     {

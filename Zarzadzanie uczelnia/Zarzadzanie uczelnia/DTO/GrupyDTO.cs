@@ -1,4 +1,4 @@
-﻿namespace Zarzadzanie_uczelnia.Models
+﻿namespace Zarzadzanie_uczelnia.DTO
 {
     public class GrupyDTO
     {

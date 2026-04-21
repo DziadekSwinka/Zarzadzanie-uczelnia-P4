@@ -60,6 +60,14 @@
                     </StackPanel>
                 </Border>
             </Button>
+            <Button Click="Przedmioty_Click" Margin="5" Background="White" BorderThickness="0">
+                <Border CornerRadius="10" Padding="15">
+                    <StackPanel>
+                        <TextBlock Text="➕" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Przedmioty" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
 
         </UniformGrid>
 

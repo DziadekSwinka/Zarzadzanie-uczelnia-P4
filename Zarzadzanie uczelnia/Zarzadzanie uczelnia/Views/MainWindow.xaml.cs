@@ -1,16 +1,6 @@
-﻿using System.Data.Common;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
-using Zarzadzanie_uczelnia;
 using Zarzadzanie_uczelnia.Views;
 
 namespace Zarzadzanie_uczelnia
@@ -51,6 +41,10 @@ namespace Zarzadzanie_uczelnia
         private void DodajOcene_click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new OcenyAddPage());
+        }
+        private void Przedmioty_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new PrzedmiotPage());
         }
     }
 }

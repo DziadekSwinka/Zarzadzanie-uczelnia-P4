@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Zarzadzanie_uczelnia.DTO;
 
 namespace Zarzadzanie_uczelnia.View_Models
 {

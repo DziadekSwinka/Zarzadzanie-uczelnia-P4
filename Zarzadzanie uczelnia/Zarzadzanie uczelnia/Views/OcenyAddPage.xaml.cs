@@ -21,9 +21,14 @@ namespace Zarzadzanie_uczelnia.Views
     /// </summary>
     public partial class OcenyAddPage : Page
     {
+        private OcenyViewModel viewModel;
         public OcenyAddPage()
         {
+            viewModel = new OcenyViewModel();
+            DataContext = viewModel;
             InitializeComponent();
+            viewModel.loadGrupy();
+            viewModel.loadKierunki();
         }
         private void DodajOcene_Click(object sender, RoutedEventArgs e)
         {
