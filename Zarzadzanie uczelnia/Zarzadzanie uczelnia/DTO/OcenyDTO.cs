@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zarzadzanie_uczelnia.DTO
+﻿namespace Zarzadzanie_uczelnia.DTO
 {
     internal class OcenyDTO
     {

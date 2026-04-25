@@ -63,11 +63,10 @@
                     <TextBox Text="{Binding Rok}" Height="30"/>
                 </StackPanel>
 
-                <CheckBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
-                          Content="Automatyczny przydział do grupy"
-                          VerticalAlignment="Bottom"
-                          Margin="5"
-                          IsChecked="True"/>
+                <TextBlock  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" 
+                       VerticalAlignment="Center"
+                       Text="Grupa jest przydzielana automatycznie"/>
+
 
                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
                         Content="Dodaj studenta"

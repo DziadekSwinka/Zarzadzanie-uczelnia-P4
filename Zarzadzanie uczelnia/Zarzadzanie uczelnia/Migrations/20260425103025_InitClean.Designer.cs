@@ -12,8 +12,8 @@ using Zarzadzanie_uczelnia;
 namespace Zarzadzanie_uczelnia.Migrations
 {
     [DbContext(typeof(UczelniaContext))]
-    [Migration("20260327123041_5")]
-    partial class _5
+    [Migration("20260425103025_InitClean")]
+    partial class InitClean
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,55 +62,7 @@ namespace Zarzadzanie_uczelnia.Migrations
                     b.ToTable("Kierunki");
                 });
 
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<DateOnly>("DataWystawienia")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("StudentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WartoscOceny")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("StudentID");
-
-                    b.ToTable("Ocena");
-                });
-
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("ECTS")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nazwa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OcenyID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OcenyID");
-
-                    b.ToTable("Przedmiot");
-                });
-
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Student", b =>
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Models.Student", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -132,8 +84,8 @@ namespace Zarzadzanie_uczelnia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NrTelefonu")
-                        .HasColumnType("int");
+                    b.Property<string>("NrTelefonu")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Rocznik")
                         .HasColumnType("int");
@@ -143,6 +95,64 @@ namespace Zarzadzanie_uczelnia.Migrations
                     b.HasIndex("GrupaID");
 
                     b.ToTable("Studenci");
+                });
+
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateOnly>("DataWystawienia")
+                        .HasColumnType("date");
+
+                    b.Property<int>("GrupaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrzedmiotID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WartoscOceny")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("GrupaID");
+
+                    b.HasIndex("PrzedmiotID");
+
+                    b.HasIndex("StudentID");
+
+                    b.ToTable("Ocena");
+                });
+
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("ECTS")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KierunekID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nazwa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("KierunekID");
+
+                    b.ToTable("Przedmiot");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Grupa", b =>
@@ -156,45 +166,71 @@ namespace Zarzadzanie_uczelnia.Migrations
                     b.Navigation("Kierunek");
                 });
 
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Models.Student", b =>
+                {
+                    b.HasOne("Zarzadzanie_uczelnia.Grupa", "Grupa")
+                        .WithMany("Studenci")
+                        .HasForeignKey("GrupaID");
+
+                    b.Navigation("Grupa");
+                });
+
             modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>
                 {
-                    b.HasOne("Zarzadzanie_uczelnia.Student", null)
-                        .WithMany("Ocena")
+                    b.HasOne("Zarzadzanie_uczelnia.Grupa", "Grupa")
+                        .WithMany("Oceny")
+                        .HasForeignKey("GrupaID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Zarzadzanie_uczelnia.Przedmioty", "Przedmiot")
+                        .WithMany("Oceny")
+                        .HasForeignKey("PrzedmiotID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Zarzadzanie_uczelnia.Models.Student", null)
+                        .WithMany("Oceny")
                         .HasForeignKey("StudentID");
+
+                    b.Navigation("Grupa");
+
+                    b.Navigation("Przedmiot");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
                 {
-                    b.HasOne("Zarzadzanie_uczelnia.Oceny", null)
-                        .WithMany("Przedmiot")
-                        .HasForeignKey("OcenyID");
-                });
+                    b.HasOne("Zarzadzanie_uczelnia.Kierunek", "Kierunek")
+                        .WithMany("Przedmioty")
+                        .HasForeignKey("KierunekID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Student", b =>
-                {
-                    b.HasOne("Zarzadzanie_uczelnia.Grupa", null)
-                        .WithMany("Studenci")
-                        .HasForeignKey("GrupaID");
+                    b.Navigation("Kierunek");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Grupa", b =>
                 {
+                    b.Navigation("Oceny");
+
                     b.Navigation("Studenci");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Kierunek", b =>
                 {
                     b.Navigation("Grupy");
+
+                    b.Navigation("Przedmioty");
                 });
 
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Models.Student", b =>
                 {
-                    b.Navigation("Przedmiot");
+                    b.Navigation("Oceny");
                 });
 
-            modelBuilder.Entity("Zarzadzanie_uczelnia.Student", b =>
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
                 {
-                    b.Navigation("Ocena");
+                    b.Navigation("Oceny");
                 });
 #pragma warning restore 612, 618
         }

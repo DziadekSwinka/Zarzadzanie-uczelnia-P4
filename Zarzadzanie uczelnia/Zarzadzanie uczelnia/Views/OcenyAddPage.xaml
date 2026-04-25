@@ -55,8 +55,16 @@
                               SelectedItem="{Binding WybranyPrzedmiot}"
                               Height="30"/>
                 </StackPanel>
+                
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
+                    <TextBlock Text="Student" FontWeight="SemiBold"/>
+                    <ComboBox ItemsSource="{Binding Studenci}"
+                            SelectedItem="{Binding WybranyStudent}"
+                            DisplayMemberPath="Display"
+                            Height="30"/>
+                </StackPanel>
 
-                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1"
                         Content="Dodaj ocenę"
                         Height="40"
                         Margin="5,15,5,0"

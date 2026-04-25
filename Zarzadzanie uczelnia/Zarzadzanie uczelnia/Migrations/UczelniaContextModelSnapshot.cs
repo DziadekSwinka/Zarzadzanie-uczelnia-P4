@@ -105,16 +105,21 @@ namespace Zarzadzanie_uczelnia.Migrations
                     b.Property<DateOnly>("DataWystawienia")
                         .HasColumnType("date");
 
+                    b.Property<int>("GrupaID")
+                        .HasColumnType("int");
+
                     b.Property<int>("PrzedmiotID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentID")
+                    b.Property<int>("StudentID")
                         .HasColumnType("int");
 
                     b.Property<int>("WartoscOceny")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("GrupaID");
 
                     b.HasIndex("PrzedmiotID");
 
@@ -134,10 +139,15 @@ namespace Zarzadzanie_uczelnia.Migrations
                     b.Property<int>("ECTS")
                         .HasColumnType("int");
 
+                    b.Property<int>("KierunekID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nazwa")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("KierunekID");
 
                     b.ToTable("Przedmiot");
                 });
@@ -155,39 +165,73 @@ namespace Zarzadzanie_uczelnia.Migrations
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Models.Student", b =>
                 {
-                    b.HasOne("Zarzadzanie_uczelnia.Grupa", null)
+                    b.HasOne("Zarzadzanie_uczelnia.Grupa", "Grupa")
                         .WithMany("Studenci")
                         .HasForeignKey("GrupaID");
+
+                    b.Navigation("Grupa");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Oceny", b =>
                 {
+                    b.HasOne("Zarzadzanie_uczelnia.Grupa", "Grupa")
+                        .WithMany("Oceny")
+                        .HasForeignKey("GrupaID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Zarzadzanie_uczelnia.Przedmioty", "Przedmiot")
-                        .WithMany()
+                        .WithMany("Oceny")
                         .HasForeignKey("PrzedmiotID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Zarzadzanie_uczelnia.Models.Student", null)
-                        .WithMany("Ocena")
-                        .HasForeignKey("StudentID");
+                    b.HasOne("Zarzadzanie_uczelnia.Models.Student", "Student")
+                        .WithMany("Oceny")
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grupa");
 
                     b.Navigation("Przedmiot");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
+                {
+                    b.HasOne("Zarzadzanie_uczelnia.Kierunek", "Kierunek")
+                        .WithMany("Przedmioty")
+                        .HasForeignKey("KierunekID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kierunek");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Grupa", b =>
                 {
+                    b.Navigation("Oceny");
+
                     b.Navigation("Studenci");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Kierunek", b =>
                 {
                     b.Navigation("Grupy");
+
+                    b.Navigation("Przedmioty");
                 });
 
             modelBuilder.Entity("Zarzadzanie_uczelnia.Models.Student", b =>
                 {
-                    b.Navigation("Ocena");
+                    b.Navigation("Oceny");
+                });
+
+            modelBuilder.Entity("Zarzadzanie_uczelnia.Przedmioty", b =>
+                {
+                    b.Navigation("Oceny");
                 });
 #pragma warning restore 612, 618
         }

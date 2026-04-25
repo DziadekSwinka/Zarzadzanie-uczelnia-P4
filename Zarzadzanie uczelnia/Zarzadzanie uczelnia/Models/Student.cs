@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zarzadzanie_uczelnia.Models
+﻿namespace Zarzadzanie_uczelnia.Models
 {
-    internal class Student 
+    public class Student
     {
-        public Student()
-        {
-            Ocena = new List<Oceny>();
-        }
-        [Key]
-        [Required]
         public int ID { get; set; }
-        [Required]
+
         public string Imie { get; set; }
-        [Required]
         public string Nazwisko { get; set; }
+
         public int Rocznik { get; set; }
         public string? Email { get; set; }
         public string? NrTelefonu { get; set; }
-        public ICollection<Oceny> Ocena { get; set; }
+
         public int? GrupaID { get; set; }
+        public Grupa Grupa { get; set; }
+
+        public ICollection<Oceny> Oceny { get; set; } = new List<Oceny>();
     }
 }

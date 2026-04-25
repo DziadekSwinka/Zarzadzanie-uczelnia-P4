@@ -23,53 +23,69 @@
             </Grid>
         </Border>
 
-        <UniformGrid Grid.Row="1" Columns="4" Margin="20,15,20,10">
+        <ScrollViewer Grid.Row="1"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled"
+              Margin="20,15,20,10">
 
-            <Button Click="Studenci_Click" Margin="5" Background="White" BorderThickness="0">
-                <Border CornerRadius="10" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="👨‍🎓" FontSize="28" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Studenci" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </Button>
+            <StackPanel Orientation="Horizontal">
 
-            <Button Click="Grupy_Click" Margin="5" Background="White" BorderThickness="0">
-                <Border CornerRadius="10" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="📚" FontSize="28" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Grupy" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </Button>
+                <Button Click="Studenci_Click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="👨‍🎓" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Studenci" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
 
-            <Button Click="Oceny_click" Margin="5" Background="White" BorderThickness="0">
-                <Border CornerRadius="10" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="📊" FontSize="28" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Oceny" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </Button>
+                <Button Click="Grupy_Click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="📚" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Grupy" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
 
-            <Button Click="DodajOcene_click" Margin="5" Background="White" BorderThickness="0">
-                <Border CornerRadius="10" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="➕" FontSize="28" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Dodaj ocenę" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </Button>
-            <Button Click="Przedmioty_Click" Margin="5" Background="White" BorderThickness="0">
-                <Border CornerRadius="10" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="➕" FontSize="28" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Przedmioty" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </Button>
+                <Button Click="Oceny_click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="📊" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Oceny" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
 
-        </UniformGrid>
+                <Button Click="DodajOcene_click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="➕" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Dodaj ocenę" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
+
+                <Button Click="Przedmioty_Click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="📖" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Przedmioty" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
+
+                <Button Click="Kierunek_Click" Margin="5" Background="White" BorderThickness="0" Width="140">
+                    <Border CornerRadius="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="🎓" FontSize="28" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Kierunki" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
+
+            </StackPanel>
+        </ScrollViewer>
 
         <Border Grid.Row="2"
                 Background="White"

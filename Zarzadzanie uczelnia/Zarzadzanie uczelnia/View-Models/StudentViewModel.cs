@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 using System.Windows;
-using Zarzadzanie_uczelnia.Models;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Zarzadzanie_uczelnia.DTO;
+using Zarzadzanie_uczelnia.Models;
 
 namespace Zarzadzanie_uczelnia.View_Models
 {
@@ -169,32 +160,26 @@ namespace Zarzadzanie_uczelnia.View_Models
 
         private void DodajDoGrupy(int studentId)
         {
-            if (autoGrupa == true)
+
+            using (var context = new UczelniaContext())
             {
-                using (var context = new UczelniaContext())
+                if (string.IsNullOrEmpty(wybranyKierunek)) return;
+
+                var grupa = context.Grupy
+                    .Where(g => g.Kierunek.Nazwa == wybranyKierunek)
+                    .OrderBy(g => g.ID)
+                    .FirstOrDefault();
+
+                if (grupa != null)
                 {
-                    if (string.IsNullOrEmpty(wybranyKierunek)) return;
+                    var studentZBazy = context.Studenci.FirstOrDefault(s => s.ID == studentId);
 
-                    var grupa = context.Grupy
-                        .Where(g => g.Kierunek.Nazwa == wybranyKierunek)
-                        .OrderBy(g => g.ID)
-                        .FirstOrDefault();
-
-                    if (grupa != null)
+                    if (studentZBazy != null)
                     {
-                        var studentZBazy = context.Studenci.FirstOrDefault(s => s.ID == studentId);
-
-                        if (studentZBazy != null)
-                        {
-                            studentZBazy.GrupaID = grupa.ID;
-                            context.SaveChanges();
-                        }
+                        studentZBazy.GrupaID = grupa.ID;
+                        context.SaveChanges();
                     }
                 }
-            }
-            else
-            {
-                PrzejdzDoGrup?.Invoke();
             }
         }
     }

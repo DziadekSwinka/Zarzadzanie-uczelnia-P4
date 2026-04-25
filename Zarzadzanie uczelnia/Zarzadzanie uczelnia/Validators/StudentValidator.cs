@@ -12,19 +12,21 @@ public class StudentValidator : AbstractValidator<StudentViewModel>
             .NotEmpty().WithMessage("Podaj nazwisko");
 
         RuleFor(x => x.NrTelefonu)
-            .Matches(@"^\+?\d{7,15}$")
+            .NotEmpty()
+            .MinimumLength(7)
+            .MaximumLength(20)
             .WithMessage("Niepoprawny numer telefonu");
 
         RuleFor(x => x.Email)
             .EmailAddress()
             .WithMessage("Niepoprawny email");
 
-        RuleFor(x => x.Kierunek)
+        RuleFor(x => x.WybranyKierunek)
             .NotEmpty()
             .WithMessage("Wybierz kierunek");
 
-        RuleFor(x => x.Rocznik)
-            .InclusiveBetween(1900, DateTime.Now.Year)
+        RuleFor(x => x.Rok)
+            .Must(r => int.TryParse(r, out int rok) && rok >= 1900 && rok <= DateTime.Now.Year)
             .WithMessage("Niepoprawny rok urodzenia");
     }
 }

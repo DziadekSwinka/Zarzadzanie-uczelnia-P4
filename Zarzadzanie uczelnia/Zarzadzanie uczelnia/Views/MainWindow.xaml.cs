@@ -46,5 +46,9 @@ namespace Zarzadzanie_uczelnia
         {
             MainFrame.Navigate(new PrzedmiotPage());
         }
+        private void Kierunek_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new KierunekPage());
+        }
     }
 }

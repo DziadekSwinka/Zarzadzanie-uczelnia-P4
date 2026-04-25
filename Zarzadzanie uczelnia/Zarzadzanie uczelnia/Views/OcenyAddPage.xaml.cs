@@ -29,10 +29,12 @@ namespace Zarzadzanie_uczelnia.Views
             InitializeComponent();
             viewModel.loadGrupy();
             viewModel.loadKierunki();
+            viewModel.loadPrzedmioty();
+            viewModel.loadStudenci();
         }
         private void DodajOcene_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("To muszę jeszcze dorobić!");
+            viewModel.DodajOcene();
         }
     }
 }

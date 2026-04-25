@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
-using Zarzadzanie_uczelnia.Models;
 using Zarzadzanie_uczelnia.Validators;
 
 namespace Zarzadzanie_uczelnia.View_Models
@@ -98,14 +95,12 @@ namespace Zarzadzanie_uczelnia.View_Models
             {
                 Nazwa = Nazwa,
                 ECTS = ectsVal,
-                ID = kierunek.ID
+                KierunekID = kierunek.ID
             });
 
             db.SaveChanges();
 
             MessageBox.Show("Dodano przedmiot");
         }
-
-        public event Action OdswiezListe;
     }
 }
