@@ -12,16 +12,12 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Dodawanie kierunku"
-                   FontSize="20"
-                   FontWeight="Bold"
-                   Margin="0,0,0,10"/>
+               FontSize="20"
+               FontWeight="Bold"
+               Margin="0,0,0,10"/>
 
         <Border Grid.Row="1" Padding="15" Background="White" CornerRadius="10">
             <Grid>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -34,16 +30,29 @@
                 </StackPanel>
 
                 <Button Grid.Row="1"
-                        Content="Dodaj kierunek"
-                        Height="40"
-                        Margin="5,15,5,0"
-                        Background="#4CAF50"
-                        Foreground="White"
-                        FontWeight="Bold"
-                        BorderThickness="0"
-                        Click="DodajKierunek_Click"/>
+                    Content="Dodaj kierunek"
+                    Height="40"
+                    Margin="5,15,5,0"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Click="DodajKierunek_Click"/>
             </Grid>
         </Border>
+
+        <DataGrid Grid.Row="2"
+              ItemsSource="{Binding KierunkiList}"
+              AutoGenerateColumns="False"
+              Margin="0,20,0,0"
+              IsReadOnly="True">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" Width="*"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 </Page>

@@ -8,12 +8,17 @@ namespace Zarzadzanie_uczelnia.Views
     /// </summary>
     public partial class OcenyPage : Page
     {
-        private StudentViewModel viewModel;
+        private OcenyViewModel viewModel;
         public OcenyPage()
         {
-            viewModel = new StudentViewModel();
+            viewModel = new OcenyViewModel();
             DataContext = viewModel;
             InitializeComponent();
+        }
+
+        private void Filtruj(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.FiltrujOceny();
         }
     }
 }

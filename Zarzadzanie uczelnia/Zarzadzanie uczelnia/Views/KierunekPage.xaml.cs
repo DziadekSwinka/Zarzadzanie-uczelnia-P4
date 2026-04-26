@@ -13,11 +13,13 @@ namespace Zarzadzanie_uczelnia.Views
             InitializeComponent();
             vm = new KierunekViewModel();
             DataContext = vm;
+            vm.LoadKierunki();
         }
 
         private void DodajKierunek_Click(object sender, RoutedEventArgs e)
         {
             vm.DodajKierunek();
+            vm.LoadKierunki();
         }
     }
 }

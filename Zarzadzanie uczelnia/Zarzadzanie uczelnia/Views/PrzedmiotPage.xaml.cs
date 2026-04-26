@@ -14,11 +14,13 @@ namespace Zarzadzanie_uczelnia.Views
             viewModel = new PrzedmiotViewModel();
             DataContext = viewModel;
             viewModel.LoadKierunki();
+            viewModel.LoadPrzedmioty();
         }
 
         private void DodajPrzedmiot_Click(object sender, RoutedEventArgs e)
         {
             viewModel.DodajPrzedmiot();
+            viewModel.LoadPrzedmioty();
         }
     }
 }

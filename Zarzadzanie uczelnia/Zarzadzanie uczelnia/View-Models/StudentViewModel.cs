@@ -167,7 +167,7 @@ namespace Zarzadzanie_uczelnia.View_Models
 
                 var grupa = context.Grupy
                     .Where(g => g.Kierunek.Nazwa == wybranyKierunek)
-                    .OrderBy(g => g.ID)
+                    .OrderBy(g => g.Studenci.Count)
                     .FirstOrDefault();
 
                 if (grupa != null)

@@ -59,6 +59,20 @@
 
             </Grid>
         </Border>
+        <DataGrid Grid.Row="2"
+          ItemsSource="{Binding PrzedmiotyList}"
+          AutoGenerateColumns="False"
+          Margin="0,20,0,0"
+          IsReadOnly="True">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" Width="*"/>
+                <DataGridTextColumn Header="ECTS" Binding="{Binding ECTS}" Width="100"/>
+                <DataGridTextColumn Header="Kierunek" Binding="{Binding KierunekNazwa}" Width="200"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 </Page>

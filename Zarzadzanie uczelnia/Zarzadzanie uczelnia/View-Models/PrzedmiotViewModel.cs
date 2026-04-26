@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using Zarzadzanie_uczelnia.Validators;
 
 namespace Zarzadzanie_uczelnia.View_Models
@@ -13,7 +14,7 @@ namespace Zarzadzanie_uczelnia.View_Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-
+        public ObservableCollection<PrzedmiotListModel> PrzedmiotyList { get; set; } = new();
         public ObservableCollection<string> Kierunki { get; set; } = new();
 
         private string nazwa;
@@ -37,6 +38,28 @@ namespace Zarzadzanie_uczelnia.View_Models
             set { wybranyKierunek = value; OnPropertyChanged(nameof(WybranyKierunek)); }
         }
 
+        public void LoadPrzedmioty()
+        {
+            using var db = new UczelniaContext();
+
+            PrzedmiotyList.Clear();
+
+            var lista = db.Przedmiot
+                .Include(p => p.Kierunek)
+                .Select(p => new PrzedmiotListModel
+                {
+                    ID = p.ID,
+                    Nazwa = p.Nazwa,
+                    ECTS = p.ECTS,
+                    KierunekNazwa = p.Kierunek.Nazwa
+                })
+                .ToList();
+
+            foreach (var p in lista)
+            {
+                PrzedmiotyList.Add(p);
+            }
+        }
         public void LoadKierunki()
         {
             using var db = new UczelniaContext();

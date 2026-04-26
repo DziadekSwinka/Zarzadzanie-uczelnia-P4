@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using Zarzadzanie_uczelnia.Validators;
 
@@ -19,7 +20,20 @@ namespace Zarzadzanie_uczelnia.View_Models
             get => nazwa;
             set { nazwa = value; OnPropertyChanged(nameof(Nazwa)); }
         }
+        public ObservableCollection<Kierunek> KierunkiList { get; set; } = new();
+        public void LoadKierunki()
+        {
+            using var db = new UczelniaContext();
 
+            KierunkiList.Clear();
+
+            var lista = db.Kierunki.ToList();
+
+            foreach (var k in lista)
+            {
+                KierunkiList.Add(k);
+            }
+        }
         private string Validate()
         {
             var validator = new KierunekValidator();

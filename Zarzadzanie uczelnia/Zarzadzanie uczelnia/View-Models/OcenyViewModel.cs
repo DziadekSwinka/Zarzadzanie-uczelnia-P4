@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
@@ -80,7 +81,46 @@ internal class OcenyViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(WartoscOceny));
         }
     }
+    public string FilterStudentId { get; set; }
+    public string FilterPrzedmiot { get; set; }
+    public void FiltrujOceny()
+{
+    using var db = new UczelniaContext();
 
+    var query = db.Ocena.AsQueryable();
+
+    if (!string.IsNullOrWhiteSpace(FilterStudentId))
+    {
+        if (int.TryParse(FilterStudentId, out int studentId))
+        {
+            query = query.Where(o => o.StudentID == studentId);
+        }
+    }
+
+    if (!string.IsNullOrWhiteSpace(FilterPrzedmiot))
+    {
+        query = query.Where(o => o.Przedmiot.Nazwa.Contains(FilterPrzedmiot));
+    }
+
+    Oceny.Clear();
+
+        var lista = query
+        .Select(o => new OcenyDTO
+        {
+            ID = o.ID,
+            WartoscOceny = o.WartoscOceny,
+            Przedmiot = o.Przedmiot.Nazwa,
+            StudentID = o.StudentID,
+            Imie = o.Student.Imie,
+            Nazwisko = o.Student.Nazwisko
+        })
+        .ToList();
+
+        foreach (var o in lista)
+    {
+        Oceny.Add(o);
+    }
+}
     public void loadStudenci()
     {
         using var db = new UczelniaContext();
@@ -182,7 +222,8 @@ internal class OcenyViewModel : INotifyPropertyChanged
             WartoscOceny = WartoscOceny,
             PrzedmiotID = przedmiot.ID,
             GrupaID = grupa.ID,
-            StudentID = student.ID
+            StudentID = student.ID,
+            DataWystawienia = DateOnly.FromDateTime(DateTime.Now)
         };
 
         db.Ocena.Add(ocena);
