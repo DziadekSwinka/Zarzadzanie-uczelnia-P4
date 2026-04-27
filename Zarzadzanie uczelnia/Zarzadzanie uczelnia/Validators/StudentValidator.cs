@@ -12,7 +12,7 @@ public class StudentValidator : AbstractValidator<StudentViewModel>
             .NotEmpty().WithMessage("Podaj nazwisko");
 
         RuleFor(x => x.NrTelefonu)
-            .NotEmpty()
+            //.NotEmpty()
             .MinimumLength(7)
             .MaximumLength(20)
             .WithMessage("Niepoprawny numer telefonu");
